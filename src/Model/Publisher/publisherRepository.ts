@@ -10,11 +10,11 @@ const create = async (publisher: Partial<PublisherModelInterface>): Promise<Publ
     }
 }
 
-const findByName = async (name: string): Promise<PublisherModelInterface | null> => {
+const findByEmail = async (email: string): Promise<PublisherModelInterface | null> => {
     try{
         const publisher = await Publisher.findOne({
             where: {
-                name
+                email
             }
         })
         return publisher
@@ -25,5 +25,5 @@ const findByName = async (name: string): Promise<PublisherModelInterface | null>
 
 export default {
     create,
-    findByName
+    findByEmail
 }

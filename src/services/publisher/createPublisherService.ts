@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import publisherRepository from "../../Model/Publisher/publisherRepository";
 
 const validPayload = (publisher: ValidPayloadPublisherInterface): boolean => {
-    if(!publisher.name || !publisher.age || !publisher.password){
+    if(!publisher.email || !publisher.password){
         return false
     }
     return true

@@ -1,7 +1,7 @@
 interface ValidPayloadPublisherInterface {
     name: string,
-    password: string
-    age: number
+    password: string,
+    email: string
 }
 
 export default ValidPayloadPublisherInterface

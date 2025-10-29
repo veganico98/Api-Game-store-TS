@@ -11,9 +11,13 @@ const Publisher = connection.define<PublisherModelInterface>('publisher', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    email:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     age: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     status: {
         type: DataTypes.INTEGER(4),

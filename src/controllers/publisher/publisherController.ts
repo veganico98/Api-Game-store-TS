@@ -1,5 +1,6 @@
 import { Request, Response} from 'express'
 import createPublisherService from '../../services/publisher/createPublisherService'
+import authPublisherService from '../../services/publisher/authPublisherService'
 
 const createPublisher = async (req: Request, res: Response): Promise<void> => {
     const validPayload = createPublisherService.validPayload(req.body)  
@@ -7,7 +8,7 @@ const createPublisher = async (req: Request, res: Response): Promise<void> => {
     if (!validPayload) {
         res.status(400)
         res.json({
-            message: "São obrigatórios os campos: Name, age, password"
+            message: "São obrigatórios os campos: Name, email, password"
         })
         return 
     }
@@ -24,24 +25,36 @@ const createPublisher = async (req: Request, res: Response): Promise<void> => {
 
     const newPublisher = await createPublisherService.create(req.body)
 
-    if (!newPublisher){
-        res.status(500)
+        if (!newPublisher){
+            res.status(500)
+            res.json({
+                message: "Não foi possivel criar"
+            })
+            return
+        }
+
         res.json({
-            message: "Não foi possivel criar"
+            message: "Publisher criada com sucesso"
         })
-        return
     }
 
-    res.json({
-        message: "Publisher criada com sucesso"
-    })
-}
+    const authPublisher = async (req: Request, res: Response): Promise<void> => {
+        const validPayload = authPublisherService.validPayload(req.body)
 
-const authPublisher = async (req: Request, res: Response): Promise<void> => {
-    res.json({
-        message: "rota de autenticação de publisher"
-    })
-}
+        if(!validPayload){
+            res.status(400)
+            res.json({
+                message: "Email e senha obrigatorios"
+            })
+            return
+        }
+
+        const publisher = authPublisherService.auth(req.body.email, req.body.password)
+        
+        res.json({
+            message: "Autenticado com sucesso"
+        })
+    }
 
 const getPublisher = async (req: Request, res: Response): Promise<void> => {
     res.json({
