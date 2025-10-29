@@ -28,7 +28,29 @@ const auth = async (email: string, password: string): Promise<PublisherModelInte
     return publisher
 }
 
+const createToken = (publisher: PublisherModelInterface): boolean | object => {
+    const JWT_SECRET: string | undefined = process.env.JWT_SECRET
+
+    if(!JWT_SECRET){
+        return false
+    }
+
+    const payload = {
+        email: publisher.email
+    }
+
+    const expiresIn = '1h'
+
+    const token = jwt.sign(payload, JWT_SECRET, {expiresIn})
+
+    return {
+        token,
+        expiresIn
+    }
+}
+
 export default {
     validPayload,
-    auth
+    auth,
+    createToken
 }

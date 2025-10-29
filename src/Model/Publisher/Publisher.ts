@@ -20,8 +20,8 @@ const Publisher = connection.define<PublisherModelInterface>('publisher', {
         allowNull: true
     },
     status: {
-        type: DataTypes.INTEGER(4),
-        allowNull: false,
+        type: DataTypes.INTEGER(1),
+        allowNull: true,
         defaultValue: 0
     },
 })

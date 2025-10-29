@@ -26,8 +26,8 @@ const create = async (publisher: Partial<PublisherModelInterface>): Promise<Publ
     }
 }
 
-const publisherExist = async (name: string): Promise<boolean> => {
-    const publisher = await publisherRepository.findByName(name)
+const publisherExist = async (email: string): Promise<boolean> => {
+    const publisher = await publisherRepository.findByEmail(email)
 
     if (publisher){
         return true

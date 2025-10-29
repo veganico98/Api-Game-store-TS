@@ -1,5 +1,6 @@
 import express, {Router} from 'express'
 import publisherController from '../../controllers/publisher/publisherController'
+import auth from '../../middleware/auth'
 
 const publisherRouter: Router = express.Router()
 
@@ -7,10 +8,10 @@ publisherRouter.post('/publisher', publisherController.createPublisher)
 
 publisherRouter.post('/auth', publisherController.authPublisher)
 
-publisherRouter.get('/me', publisherController.getPublisher)
+publisherRouter.get('/me', auth, publisherController.getPublisher)
 
-publisherRouter.delete('/me', publisherController.destroyPublisher)
+publisherRouter.delete('/me', auth, publisherController.destroyPublisher)
 
-publisherRouter.patch('/me', publisherController.updatePublisher)
+publisherRouter.patch('/me',auth, publisherController.updatePublisher)
 
 export default publisherRouter
