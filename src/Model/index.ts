@@ -2,7 +2,7 @@ import connection from "../config/database";
 import Game from "./game/Game";
 import Publisher from "./Publisher/Publisher";
 
-Game.hasMany(Game, {
+Publisher.hasMany(Game, {
     foreignKey: {
         name: "publisherId",
         onDelete: "CASCADE",
@@ -17,5 +17,6 @@ connection.sync({
 })
 
 export default {
-    Publisher
+    Publisher,
+    Game
 }

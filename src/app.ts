@@ -1,6 +1,7 @@
 import express, { Express } from "express"
 import publisherRouter from "./routers/publisher"
 import GameRouter from "./routers/game"
+import gameRouter from "./routers/game"
 
 const app: Express = express()
 
