@@ -1,6 +1,14 @@
 import connection from "../config/database";
+import Game from "./game/Game";
 import Publisher from "./Publisher/Publisher";
 
+Game.hasMany(Game, {
+    foreignKey: {
+        name: "publisherId",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
+    }
+})
 connection.sync({
     force: false,
     alter: true
