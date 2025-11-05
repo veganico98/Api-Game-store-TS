@@ -22,7 +22,7 @@ const Publisher = connection.define<PublisherModelInterface>('publisher', {
     status: {
         type: DataTypes.INTEGER(1),
         allowNull: true,
-        defaultValue: 0
+        defaultValue: 1
     },
 })
 

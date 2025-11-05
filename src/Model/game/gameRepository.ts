@@ -59,9 +59,13 @@ const update = async (publisher: Partial<GameModelInterface>, id: number) => {
     }
 }
 
-const findAll = async (): Promise<GameModelInterface[]> => {
+const findAll = async (where: object = {}): Promise<GameModelInterface[]> => {
     try{
-        const games = await Game.findAll();
+        const games = await Game.findAll({
+            where:{
+                ...where
+            }
+        });
         return games;
     } catch (error: any){
         throw new Error(error)

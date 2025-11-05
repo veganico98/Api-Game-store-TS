@@ -1,9 +1,10 @@
 import { Response, Request } from 'express'
 import gameRepository from '../../Model/game/gameRepository'
-import createGameService from '../../services/game/createGameService'
+import salesGamesServices from '../../services/game/salesGamesServices'
+import createGameService from '../../services/game/createGAmeService'
 
 const create = async (req: Request, res: Response): Promise<void> => {
-    const publisherId = req.publisher.id
+    const publisherId = req.publisher?.id
     const valid = createGameService.validPayload(req.body)
 
     if (!valid){
@@ -16,7 +17,7 @@ const create = async (req: Request, res: Response): Promise<void> => {
 
     const hasGameName = await createGameService.hasRegister(req.body.name, publisherId)
 
-    if(!hasGameName){
+    if(hasGameName){
         res.status(400)
         res.json({
             message: "Game com este nome já existe"
@@ -46,6 +47,32 @@ const create = async (req: Request, res: Response): Promise<void> => {
     })
 }
 
+const getSalesGames = async (req: Request, res: Response) => {
+    if(!req.params.id){
+        res.status(400)
+        res.json({
+            message: "O Id é obrigatório"
+        })
+        return
+    }
+
+    const games = await salesGamesServices.getAllById(parseInt(req.params.id))
+
+ if (!games){
+    res.status(404)
+    res.json({
+        message: "Nenhum dado encontrado"
+    })
+    return
+ }
+
+ res.json({
+    message: "Busca realizada com sucesso",
+    games
+ })
+}
+
 export default {
-    create
+    create,
+    getSalesGames
 }

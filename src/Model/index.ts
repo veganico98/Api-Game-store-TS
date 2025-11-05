@@ -1,6 +1,7 @@
 import connection from "../config/database";
 import Game from "./game/Game";
 import Publisher from "./Publisher/Publisher";
+import Order from "./Order/Order";
 
 Publisher.hasMany(Game, {
     foreignKey: {
@@ -9,6 +10,9 @@ Publisher.hasMany(Game, {
         onUpdate: "CASCADE"
     }
 })
+
+Game.hasMany(Order, {})
+
 connection.sync({
     force: false,
     alter: true
