@@ -24,6 +24,17 @@ const findByName = async (name: string, where: object = {}): Promise<GameModelIn
     }
 }
 
+const findById = async (id: number): Promise<GameModelInterface | null> => {
+    try{
+        const game = await Game.findOne({
+            where: { id }
+        })
+        return game
+    }catch(error: any){
+        throw new Error(error);
+    }
+}
+
 const destroy = async (id: number) => {
     try{
         const game = await Game.destroy({
@@ -77,5 +88,6 @@ export default {
     findByName,
     destroy,
     update,
-    findAll
+    findAll,
+    findById
 }

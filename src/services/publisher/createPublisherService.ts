@@ -7,6 +7,7 @@ const validPayload = (publisher: ValidPayloadPublisherInterface): boolean => {
     if(!publisher.email || !publisher.password){
         return false
     }
+    
     return true
 }
 

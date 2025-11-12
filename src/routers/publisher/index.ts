@@ -14,4 +14,7 @@ publisherRouter.delete('/me', auth, publisherController.destroyPublisher)
 
 publisherRouter.patch('/me',auth, publisherController.updatePublisher)
 
+publisherRouter.get('/publishers', authAdmin, publisherController.getUsers)
+publisherRouter.get('/publisher/:email', authAdmin, publisherController.getUserAdmin)
+
 export default publisherRouter

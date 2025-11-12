@@ -3,6 +3,8 @@ import createPublisherService from '../../services/publisher/createPublisherServ
 import authPublisherService from '../../services/publisher/authPublisherService'
 import destroyPublisherService from '../../services/publisher/destroyPublisherService'
 import updatePublisherService from '../../services/publisher/updatePublisherService'
+import getPublisherService from '../../services/publisher/getPublisherService'
+import publisherRepository from '../../Model/Publisher/publisherRepository'
 
 const createPublisher = async (req: Request, res: Response): Promise<void> => {
     try{
@@ -144,10 +146,44 @@ const updatePublisher = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
+const getPublishers = async (req: Request, res: Response): Promise<void> => {
+    try{
+        const publishers = await getPublisherService.getPublishers();
+
+        res.json({
+            total: publishers.length,
+            publishers
+        })
+    }catch (error){
+        res.status(500)
+        res.json({
+            message: "Houve um erro interno"
+        })
+    }
+}
+
+const getPublisherAdmin = async (req: Request, res: Response): Promise<void> => {
+    try{
+        const email = req.params.email
+        const publisher = await publisherRepository.findByEmail(email)
+
+        res.json({
+            publisher
+        })
+    }catch(error){
+        res.status(500)
+        res.json({
+            message: "Houve um erro interno"
+        })
+    }
+}
+
 export default {
     createPublisher,
     authPublisher,
     getPublisher,
     destroyPublisher,
-    updatePublisher
+    updatePublisher,
+    getPublishers,
+    getPublisherAdmin
 }

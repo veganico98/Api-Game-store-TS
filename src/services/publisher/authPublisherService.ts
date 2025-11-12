@@ -14,7 +14,6 @@ const validPayload = (payload: ValidPayloadAuthInterface): boolean => {
 
 const auth = async (email: string, password: string): Promise<PublisherModelInterface | null> => {
     const publisher = await publisherRepository.findByEmail(email)
-
     if(!publisher) {
         return null
     }

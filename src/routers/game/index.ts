@@ -8,4 +8,8 @@ gameRouter.post("/game",auth, gameController.create)
 
 gameRouter.get("/games/sales/:id", gameController.getSalesGames)
 
+gameRouter.get("/game/:id", auth, gameController.show)
+gameRouter.patch("/game/:id", auth, gameController.update)
+gameRouter.delete("/game/:id", auth, gameController.destroy)
+
 export default gameRouter
